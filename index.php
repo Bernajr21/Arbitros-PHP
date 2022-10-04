@@ -122,6 +122,52 @@ function partidosTotalTemp($conn)
     $sum = $row[0];
     return $sum;
 }
+function localUltimoPartido($conn)
+{
+    $sql = "SELECT * FROM `tab02_partido`  \n" . "ORDER BY `tab02_partido`.`tab02_fecha` DESC LIMIT 1";
+    $res = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_row($res);
+    $sum = $row[3];
+    return $sum;
+}
+function visitanteUltimoPartido($conn)
+{
+    $sql = "SELECT * FROM `tab02_partido`  \n" . "ORDER BY `tab02_partido`.`tab02_fecha` DESC LIMIT 1";
+    $res = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_row($res);
+    $sum = $row[4];
+    return $sum;
+}
+function categoriaParse($categoria)
+{
+    $devolt = "Error";
+    switch ($categoria) {
+        case 1:
+            $devolt = "Prebenjamín";
+            break;
+        case 2:
+            $devolt = "Benjamín";
+            break;
+        case 3:
+            $devolt = "Alevín";
+            break;
+        case 4:
+            $devolt = "Infantil";
+            break;
+        case 5:
+            $devolt = "Cadete";
+            break;
+        case 6:
+            $devolt = "Juvenil";
+            break;
+        case 7:
+            $devolt = "Senior";
+            break;
+        case 8:
+            $devolt = "Veteranos";
+            break;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -568,7 +614,7 @@ function partidosTotalTemp($conn)
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Ganancias Mensuales</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -737,21 +783,27 @@ function partidosTotalTemp($conn)
                         </div>
 
                         <div class="col-lg-6 mb-4">
+                            <!--AQUI-->
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Último Partido</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
+                                        <h5><strong><?php echo localUltimoPartido($conn) ?></strong> - <strong><?php echo visitanteUltimoPartido($conn) ?></strong></h5>
                                     </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
+                                    <p><strong>Fecha: </strong></p>
+                                    <p><strong>Localidad: </strong></p>
+                                    <p><strong>Hora: </strong></p>
+                                    <p><strong>Categoria: </strong></p>
+                                    <div class="text-center">
+                                        <h5><strong>117.96€</strong></h5>
+                                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Más Información &rarr;</a>
+                                    </div>
+                                    
+
                                 </div>
                             </div>
 
